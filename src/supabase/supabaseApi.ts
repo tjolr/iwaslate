@@ -1,25 +1,25 @@
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 
-export const getAllLatecomingsForUser = async (uuid: string) => {
-  let { latecomings, error } = await supabase
-  .from('latecomings')
-  .select('*')
-  .eq('guilty', uuid)
+export const getAllLatecomingsForUser = async (
+  uuid: string
+): Promise<Latecoming[]> => {
+  let { data, error } = await supabase
+    .from("latecomings")
+    .select("*")
+    .eq("guilty", uuid);
 
   if (error) throw error;
 
-  return latecomings;
-}
+  return data as Latecoming[];
+};
 
 export const addNewLatecoming = async (uuid: string, minutes: number) => {
-  const { latecoming, error } = await supabase
-  .from('latecomings')
-  .insert([
-    { guilty: uuid, minutes: minutes },
-  ])
+  const { data, error } = await supabase
+    .from("latecomings")
+    .insert([{ guilty: uuid, minutes: minutes }]);
 
   if (error) throw error;
-}
+};
 
 export interface Latecoming {
   id: number;

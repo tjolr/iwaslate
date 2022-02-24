@@ -1,20 +1,15 @@
-import { Logo } from './logo'
+import { Logo } from "./logo";
+import Hero from "./components/Hero";
+import theme from "./theme/theme";
+import { ThemeProvider } from "styled-components";
 
-export function App() {
+
+export const App = () => {
   return (
     <>
-      <Logo />
-      <p>Hello Vite + Preact!</p>
-      <p>
-        <a
-          class="link"
-          href="https://preactjs.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </p>
+      <ThemeProvider theme={theme}>
+        <Hero />
+      </ThemeProvider>
     </>
-  )
-}
+  );
+};

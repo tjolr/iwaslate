@@ -8,10 +8,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.5.15"
+    "@fontsource/roboto": "^4.5.3",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.3",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "^5.4.2",
+    "@supabase/supabase-js": "^1.30.6",
+    "@types/styled-components": "^5.1.23",
+    "preact": "^10.5.15",
+    "styled-components": "^5.3.3"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.1.5",
+    "@types/node": "^17.0.21",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   }
