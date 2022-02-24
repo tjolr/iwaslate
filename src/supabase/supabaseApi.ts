@@ -1,5 +1,13 @@
 import { supabase } from "./supabase";
 
+export const getProfiles = async (): Promise<Profile[]> => {
+  const { data, error } = await supabase.from("profiles").select("*");
+
+  if (error || !data) throw error;
+
+  return data as Profile[];
+};
+
 export const getAllLatecomingsForUser = async (
   uuid: string
 ): Promise<Latecoming[]> => {
@@ -8,7 +16,7 @@ export const getAllLatecomingsForUser = async (
     .select("*")
     .eq("guilty", uuid);
 
-  if (error) throw error;
+  if (error || !data) throw error;
 
   return data as Latecoming[];
 };
@@ -26,4 +34,15 @@ export interface Latecoming {
   created_at: Date;
   guilty: string;
   minutes: number;
+}
+
+export interface Profile {
+  id: string;
+  username: string;
+  ppu: number;
+}
+
+export interface LatecomingProfile extends Profile {
+  totalMinutes: number;
+  earnedPpu?: number;
 }
