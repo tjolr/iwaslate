@@ -40,15 +40,19 @@ const IncDecAmount = styled.div`
 `;
 
 const StyledIconButton = styled(IconButton)`
-  color: #f3d853;
+  color: #53aa7a;
   margin: 0 1rem;
 `;
 
 const StyledButton = styled(Button)`
   width: 80%;
   border-radius: 10px;
-  background: #f3d853;
-  color: black;
+  background: #53aa7a;
+  color: white;
+
+  :hover {
+    background: #5dc08a;
+  }
 `;
 
 export default ParticipantAddValue;

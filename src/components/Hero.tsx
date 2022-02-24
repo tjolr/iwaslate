@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   `};
 
   width: 100%;
-  height: clamp(25rem, 25rem + 3vh, 35rem);
+  height: clamp(25rem, 25rem + 3vh + 4vw, 40rem);
   border-bottom-left-radius: 0%;
   border-bottom-right-radius: 20%;
 `;
