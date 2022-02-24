@@ -8,6 +8,7 @@ const ParticipantItem = ({
   ppu,
   earnedPpu,
   totalMinutes,
+  id,
 }: LatecomingProfile) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -24,7 +25,7 @@ const ParticipantItem = ({
         Har vært for sen totalt {totalMinutes} minutter
       </Typography>
 
-      <ParticipantAddValue />
+      <ParticipantAddValue profileId={id} />
     </Wrapper>
   );
 };

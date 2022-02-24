@@ -22,6 +22,8 @@ export const getAllLatecomingsForUser = async (
 };
 
 export const addNewLatecoming = async (uuid: string, minutes: number) => {
+  if (minutes <= 0) return;
+
   const { data, error } = await supabase
     .from("latecomings")
     .insert([{ guilty: uuid, minutes: minutes }]);
