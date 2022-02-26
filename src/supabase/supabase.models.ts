@@ -1,7 +1,5 @@
 export interface Latecoming {
-  id: number;
   created_at: Date;
-  guilty: string;
   minutes: number;
 }
 

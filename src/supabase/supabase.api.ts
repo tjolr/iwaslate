@@ -12,9 +12,9 @@ export const getProfiles = async (): Promise<Profile[]> => {
 export const getAllLatecomingsForUser = async (
   uuid: string
 ): Promise<Latecoming[]> => {
-  let { data, error } = await supabase
+  const { data, error } = await supabase
     .from('latecomings')
-    .select('*')
+    .select('minutes, created_at')
     .eq('guilty', uuid);
 
   if (error || !data) throw error;
