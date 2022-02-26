@@ -1,6 +1,6 @@
 import { Typography, useMediaQuery } from "@mui/material";
 import styled, { useTheme } from "styled-components";
-import { LatecomingProfile } from "../supabase/supabaseApi";
+import { LatecomingProfile } from "../supabase/supabase.models";
 import ParticipantAddValue from "./ParticipantAddValue";
 
 const ParticipantItem = ({
