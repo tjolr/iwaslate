@@ -1,7 +1,7 @@
-import { Typography, useMediaQuery } from "@mui/material";
-import styled, { useTheme } from "styled-components";
-import { LatecomingProfile } from "../supabase/supabase.models";
-import ParticipantAddValue from "./ParticipantAddValue";
+import { Typography, useMediaQuery } from '@mui/material';
+import styled, { useTheme } from 'styled-components';
+import { LatecomingProfile } from '../supabase/supabase.models';
+import ParticipantAddValue from './ParticipantAddValue';
 
 const ParticipantItem = ({
   username,
@@ -11,11 +11,11 @@ const ParticipantItem = ({
   id,
 }: LatecomingProfile) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Wrapper>
-      <Typography variant={isMobile ? "h3" : "h1"} sx={{ mb: 3 }}>
-        {earnedPpu} <span style={{ fontSize: "35%" }}>/ {ppu} NOK</span>
+      <Typography variant={isMobile ? 'h3' : 'h1'} sx={{ mb: 3 }}>
+        {earnedPpu} <span style={{ fontSize: '35%' }}>/ {ppu} NOK</span>
       </Typography>
       <Typography variant="h5" sx={{ my: 1 }}>
         {username}

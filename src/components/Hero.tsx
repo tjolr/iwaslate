@@ -1,8 +1,8 @@
-import { IconButton } from "@mui/material";
-import styled from "styled-components";
-import Title from "./Title";
-import MenuIcon from "@mui/icons-material/Menu";
-import ParticipantOverview from "./ParticipantOverview";
+import { IconButton } from '@mui/material';
+import styled from 'styled-components';
+import Title from './Title';
+import MenuIcon from '@mui/icons-material/Menu';
+import ParticipantOverview from './ParticipantOverview';
 
 const Hero = () => {
   return (
@@ -10,7 +10,7 @@ const Hero = () => {
       <Navbar>
         <Title />
         <IconButton>
-          <MenuIcon style={{ color: "white" }} />
+          <MenuIcon style={{ color: 'white' }} />
         </IconButton>
       </Navbar>
 

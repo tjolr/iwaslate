@@ -1,15 +1,15 @@
-import styled from "styled-components";
-import ParticipantItem from "./ParticipantItem";
-import { useEffect, useState } from "preact/hooks";
+import styled from 'styled-components';
+import ParticipantItem from './ParticipantItem';
+import { useEffect, useState } from 'preact/hooks';
 import {
   getAllLatecomingsForUser,
   getProfiles,
-} from "../supabase/supabase.api";
+} from '../supabase/supabase.api';
 import {
   Latecoming,
   LatecomingProfile,
   Profile,
-} from "../supabase/supabase.models";
+} from '../supabase/supabase.models';
 
 const ParticipantOverview = () => {
   const PENALTY = 10;
