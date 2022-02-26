@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useState } from "preact/hooks";
-import { addNewLatecoming } from "../supabase/supabaseApi";
+import { addNewLatecoming } from "../supabase/supabase.api";
 import { useSnackbar } from "notistack";
 import { type } from "os";
 

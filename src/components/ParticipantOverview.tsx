@@ -4,13 +4,16 @@ import { useEffect, useState } from "preact/hooks";
 import {
   getAllLatecomingsForUser,
   getProfiles,
+} from "../supabase/supabase.api";
+import {
   Latecoming,
   LatecomingProfile,
   Profile,
-} from "../supabase/supabaseApi";
+} from "../supabase/supabase.models";
 
 const ParticipantOverview = () => {
   const PENALTY = 10;
+
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [latecomingProfiles, setLatecomingProfiles] = useState<
     LatecomingProfile[]
