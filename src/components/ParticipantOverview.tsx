@@ -10,69 +10,93 @@ import {
   LatecomingProfile,
   Profile,
 } from '../supabase/supabase.models';
+import { useSnackbar } from 'notistack';
 
 const ParticipantOverview = () => {
   const PENALTY = 10;
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [latecomings, setLatecomings] = useState<Record<string, Latecoming[]>>(
+    {}
+  );
   const [latecomingProfiles, setLatecomingProfiles] = useState<
-    LatecomingProfile[]
-  >([]);
-  const [tmpLatecomingProfiles, setTmpLatecomingProfiles] = useState<
     LatecomingProfile[]
   >([]);
 
   const fetchProfiles = async () => {
-    const profiles: Profile[] = await getProfiles();
-    setProfiles(() => [...profiles]);
+    try {
+      const profiles: Profile[] = await getProfiles();
+      setProfiles(profiles);
+    } catch (e) {
+      enqueueSnackbar('Det skjedde en feil i henting av profiler', {
+        variant: 'error',
+      });
+    }
   };
 
-  const fetchLatecomings = () => {
-    profiles.forEach(async (profile: Profile) => {
-      const latecomings: Latecoming[] = await getAllLatecomingsForUser(
-        profile.id
-      );
+  const fetchLatecomings = async () => {
+    const newLatecomings: Record<string, Latecoming[]> = {};
 
-      let totalMinutes = 0;
-      latecomings.map((latecoming: Latecoming) => {
-        totalMinutes += latecoming.minutes;
-      });
+    for (const profile of profiles) {
+      try {
+        const userLatecomings: Latecoming[] = await getAllLatecomingsForUser(
+          profile.id
+        );
+        newLatecomings[profile.id] = userLatecomings;
+      } catch (e) {
+        enqueueSnackbar('Det skjedde en feil i henting av latecomings', {
+          variant: 'error',
+        });
+      }
+    }
+
+    setLatecomings(newLatecomings);
+  };
+
+  const calculateLatecomingProfiles = () => {
+    const newLatecomingProfiles: LatecomingProfile[] = [];
+
+    // First calculate how many minutes late each person has been
+    profiles.forEach((profile) => {
+      const totalLateMinutes = latecomings[profile.id].reduce(
+        (total, latecoming) => total + latecoming.minutes,
+        0
+      );
 
       const latecomingProfile: LatecomingProfile = {
         ...profile,
-        totalMinutes,
+        totalMinutes: totalLateMinutes,
       };
 
-      setTmpLatecomingProfiles((tmpLateComingProfiles) => [
-        ...tmpLateComingProfiles,
-        latecomingProfile,
-      ]);
+      newLatecomingProfiles.push(latecomingProfile);
     });
-  };
 
-  const findEarnedPpu = () => {
-    const newLatecomingProfiles = tmpLatecomingProfiles.map(
-      (item: LatecomingProfile) => {
-        // looping through other profiles to recieved earned ppu
-        let totalEarnedPpu = 0;
-        tmpLatecomingProfiles.forEach((otherItem: LatecomingProfile) => {
-          if (item.id !== otherItem.id) {
+    // Update latecomingProfiles with earnings
+    const updatedLatecomingProfiles = newLatecomingProfiles.map(
+      (latecomingProfile) => {
+        let earnings = 0;
+        // looping through other profiles to calculate earnings
+        newLatecomingProfiles.forEach((otherLatecomingProfile) => {
+          if (latecomingProfile.id !== otherLatecomingProfile.id) {
             // multiply total minutes late with penalty, and divide with
             // the amount of other profiles in the same group
-            totalEarnedPpu += otherItem.totalMinutes * PENALTY;
+            // (currently doesn't do the dividing part)
+            earnings += otherLatecomingProfile.totalMinutes * PENALTY;
           }
         });
 
-        const latecomingProfile: LatecomingProfile = {
-          ...item,
-          earnedPpu: totalEarnedPpu,
+        const updatedLatecomingProfile: LatecomingProfile = {
+          ...latecomingProfile,
+          earnedPpu: earnings,
         };
 
-        return latecomingProfile;
+        return updatedLatecomingProfile;
       }
     );
 
-    setLatecomingProfiles(() => [...newLatecomingProfiles]);
+    setLatecomingProfiles(updatedLatecomingProfiles);
   };
 
   useEffect(() => {
@@ -80,12 +104,12 @@ const ParticipantOverview = () => {
   }, []);
 
   useEffect(() => {
-    fetchLatecomings();
+    if (profiles.length !== 0) fetchLatecomings();
   }, [profiles]);
 
   useEffect(() => {
-    findEarnedPpu();
-  }, [tmpLatecomingProfiles]);
+    if (Object.keys(latecomings).length !== 0) calculateLatecomingProfiles();
+  }, [latecomings]);
 
   return (
     <Wrapper>
