@@ -1,7 +1,7 @@
-import Hero from "./components/Hero";
-import theme from "./theme/theme";
-import { ThemeProvider } from "styled-components";
-import { SnackbarProvider } from "notistack";
+import Hero from './components/Hero';
+import theme from './theme/theme';
+import { ThemeProvider } from 'styled-components';
+import { SnackbarProvider } from 'notistack';
 
 export const App = () => {
   return (
@@ -10,8 +10,8 @@ export const App = () => {
         <SnackbarProvider
           maxSnack={3}
           anchorOrigin={{
-            vertical: "top",
-            horizontal: "center",
+            vertical: 'top',
+            horizontal: 'center',
           }}
         >
           <Hero />

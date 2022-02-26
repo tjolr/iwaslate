@@ -1,4 +1,4 @@
-import { Latecoming, LatecomingProfile } from "../supabase/supabase.models";
+import { Latecoming, LatecomingProfile } from '../supabase/supabase.models';
 export const getLatecomingProfilesFromLatecomings = (
   latecomings: Latecoming[]
 ): LatecomingProfile[] => {

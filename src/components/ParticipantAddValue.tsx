@@ -1,11 +1,11 @@
-import { Button, IconButton, Typography } from "@mui/material";
-import styled from "styled-components";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { useState } from "preact/hooks";
-import { addNewLatecoming } from "../supabase/supabase.api";
-import { useSnackbar } from "notistack";
-import { type } from "os";
+import { Button, IconButton, Typography } from '@mui/material';
+import styled from 'styled-components';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { useState } from 'preact/hooks';
+import { addNewLatecoming } from '../supabase/supabase.api';
+import { useSnackbar } from 'notistack';
+import { type } from 'os';
 
 interface Props {
   profileId: string;
@@ -24,10 +24,10 @@ const ParticipantAddValue = ({ profileId }: Props) => {
 
     try {
       await addNewLatecoming(profileId, minutes);
-      enqueueSnackbar("Oppdatering var vellykket", { variant: "success" });
+      enqueueSnackbar('Oppdatering var vellykket', { variant: 'success' });
       setMinutes(0);
     } catch (e) {
-      enqueueSnackbar("Det skjedde en feil", { variant: "error" });
+      enqueueSnackbar('Det skjedde en feil', { variant: 'error' });
     }
   };
 
