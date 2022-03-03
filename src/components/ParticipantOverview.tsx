@@ -11,19 +11,23 @@ import {
   Profile,
 } from '../supabase/supabase.models';
 import { useSnackbar } from 'notistack';
+import { useRecoilState } from 'recoil';
+import {
+  latecomingProfilesState,
+  latecomingsState,
+  profilesState,
+} from '../store/state';
 
 const ParticipantOverview = () => {
   const PENALTY = 10;
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [latecomings, setLatecomings] = useState<Record<string, Latecoming[]>>(
-    {}
+  const [profiles, setProfiles] = useRecoilState(profilesState);
+  const [latecomings, setLatecomings] = useRecoilState(latecomingsState);
+  const [latecomingProfiles, setLatecomingProfiles] = useRecoilState(
+    latecomingProfilesState
   );
-  const [latecomingProfiles, setLatecomingProfiles] = useState<
-    LatecomingProfile[]
-  >([]);
 
   const fetchProfiles = async () => {
     try {

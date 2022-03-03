@@ -3,6 +3,10 @@ export interface Latecoming {
   minutes: number;
 }
 
+export interface Latecomings {
+  [profileId: string]: Latecoming[];
+}
+
 export interface Profile {
   id: string;
   username: string;

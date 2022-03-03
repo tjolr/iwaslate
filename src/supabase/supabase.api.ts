@@ -22,12 +22,17 @@ export const getAllLatecomingsForUser = async (
   return data as Latecoming[];
 };
 
-export const addNewLatecoming = async (uuid: string, minutes: number) => {
+export const addNewLatecoming = async (
+  uuid: string,
+  minutes: number
+): Promise<string | undefined> => {
   if (minutes <= 0) return;
 
   const { data, error } = await supabase
     .from('latecomings')
     .insert([{ guilty: uuid, minutes: minutes }]);
 
-  if (error) throw error;
+  if (error || !data) throw error;
+
+  if (data?.length > 0) return [...data][0]['created_at'];
 };
