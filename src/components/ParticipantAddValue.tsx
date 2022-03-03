@@ -72,6 +72,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   color: white;
+  margin-bottom: 2rem;
 `;
 
 const IncDecAmount = styled.div`

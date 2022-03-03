@@ -1,3 +1,5 @@
+import { h } from 'preact';
+import Contract from './Contract';
 import Hero from './Hero';
 import RewardSection from './RewardSection';
 
@@ -6,6 +8,7 @@ const MainPage = () => {
     <>
       <Hero />
       <RewardSection />
+      <Contract />
     </>
   );
 };

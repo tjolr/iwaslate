@@ -21,7 +21,7 @@ const ParticipantItem = ({
         {username}
       </Typography>
 
-      <Typography variant="subtitle1" sx={{ mb: 3 }}>
+      <Typography variant="subtitle1" sx={{ mb: 2, mx: 3 }}>
         Har vært for sen totalt {totalMinutes} minutter
       </Typography>
 
