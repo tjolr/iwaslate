@@ -11,3 +11,34 @@ body {
 * {
   box-sizing: border-box;
 }
+
+/* XS */
+@media screen and (min-width: 0px) {
+  html {
+    font-size: 13px;
+  }
+}
+/* SM */
+@media screen and (min-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+}
+/* MD */
+@media screen and (min-width: 960px) {
+  html {
+    font-size: 15px;
+  }
+}
+/* LG */
+@media screen and (min-width: 1280px) {
+  html {
+    font-size: 17px;
+  }
+}
+/* XL */
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 19px;
+  }
+}

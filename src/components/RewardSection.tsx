@@ -38,21 +38,22 @@ const Wrapper = styled.div`
 
 const Blob = styled.div`
   border-radius: 58% 42% 33% 67% / 67% 67% 33% 33%;
-  position: absolute;
-  left: -20rem;
-  top: -20rem;
-  bottom: -5rem;
-  right: 35%;
-  z-index: 0;
-  //background: ${(props) => alpha(props.theme.palette.primary.main, 0.1)};
   background: ${(props) => `
         linear-gradient(275deg, 
             ${alpha(props.theme.palette.secondary.main, 0.26)},
         ${alpha(props.theme.palette.primary.main, 0.2)} 120%
         )`};
 
+  position: absolute;
+  left: -20rem;
+  top: -20rem;
+  bottom: -20rem;
+  right: 32%;
+  z-index: 0;
+
   ${(props) => props.theme.breakpoints.down('sm')} {
-    right: 20%;
+    right: 22%;
+    left: -35rem;
   }
 `;
 

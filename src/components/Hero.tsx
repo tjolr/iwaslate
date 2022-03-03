@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   box-shadow: ${(props) => props.theme.shadows[18]};
 
   width: 100%;
-  height: clamp(25rem, 25rem + 3vh + 4vw, 40rem);
+  height: clamp(25rem, 25rem + 4.5vh + 5vw, 43rem);
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 35%;
   ${(props) => props.theme.breakpoints.down('sm')} {
