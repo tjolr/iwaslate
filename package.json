@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.23",
     "notistack": "^2.0.3",
     "preact": "^10.5.15",
+    "recoil": "^0.6.1",
     "styled-components": "^5.3.3"
   },
   "resolutions": {

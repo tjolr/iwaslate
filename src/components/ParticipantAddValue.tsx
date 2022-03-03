@@ -5,7 +5,9 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'preact/hooks';
 import { addNewLatecoming } from '../supabase/supabase.api';
 import { useSnackbar } from 'notistack';
-import { type } from 'os';
+import { useSetRecoilState } from 'recoil';
+import { latecomingsState } from '../store/state';
+import { Latecoming } from '../supabase/supabase.models';
 
 interface Props {
   profileId: string;
@@ -13,6 +15,7 @@ interface Props {
 
 const ParticipantAddValue = ({ profileId }: Props) => {
   const [minutes, setMinutes] = useState<number>(0);
+  const setLatecomings = useSetRecoilState(latecomingsState);
   const { enqueueSnackbar } = useSnackbar();
 
   const incrementMinutes = () => setMinutes((minutes) => minutes + 1);
@@ -23,7 +26,18 @@ const ParticipantAddValue = ({ profileId }: Props) => {
     if (minutes === 0) return;
 
     try {
-      await addNewLatecoming(profileId, minutes);
+      const created_at = await addNewLatecoming(profileId, minutes);
+
+      const newLatecoming: Latecoming = {
+        minutes: minutes,
+        created_at: created_at ? new Date(created_at) : new Date(),
+      };
+
+      setLatecomings((latecomings) => ({
+        ...latecomings,
+        [profileId]: [...latecomings[profileId], newLatecoming],
+      }));
+
       enqueueSnackbar('Oppdatering var vellykket', { variant: 'success' });
       setMinutes(0);
     } catch (e) {

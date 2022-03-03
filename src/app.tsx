@@ -2,21 +2,24 @@ import Hero from './components/Hero';
 import theme from './theme/theme';
 import { ThemeProvider } from 'styled-components';
 import { SnackbarProvider } from 'notistack';
+import { RecoilRoot } from 'recoil';
 
 export const App = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <SnackbarProvider
-          maxSnack={3}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        >
-          <Hero />
-        </SnackbarProvider>
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <Hero />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </RecoilRoot>
     </>
   );
 };
