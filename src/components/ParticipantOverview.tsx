@@ -131,6 +131,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   margin: 2rem 0rem;
+  z-index: 10;
 `;
 
 export default ParticipantOverview;

@@ -1,8 +1,8 @@
-import Hero from './components/Hero';
 import theme from './theme/theme';
 import { ThemeProvider } from 'styled-components';
 import { SnackbarProvider } from 'notistack';
 import { RecoilRoot } from 'recoil';
+import MainPage from './components/MainPage';
 
 export const App = () => {
   return (
@@ -16,7 +16,7 @@ export const App = () => {
               horizontal: 'center',
             }}
           >
-            <Hero />
+            <MainPage />
           </SnackbarProvider>
         </ThemeProvider>
       </RecoilRoot>

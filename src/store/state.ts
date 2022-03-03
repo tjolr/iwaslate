@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import {
-  Latecoming,
   LatecomingProfile,
   Latecomings,
   Profile,
