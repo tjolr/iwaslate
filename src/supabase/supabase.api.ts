@@ -6,7 +6,17 @@ export const getProfiles = async (): Promise<Profile[]> => {
 
   if (error || !data) throw error;
 
-  return data as Profile[];
+  const profiles: Profile[] = data.map(
+    ({ id, username, ppu, reward, reward_info }) => ({
+      id,
+      username,
+      ppu,
+      reward,
+      rewardInfo: reward_info,
+    })
+  );
+
+  return profiles;
 };
 
 export const getAllLatecomingsForUser = async (

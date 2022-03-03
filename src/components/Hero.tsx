@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material';
+import { IconButton, lighten } from '@mui/material';
 import styled from 'styled-components';
 import Title from './Title';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -21,14 +21,22 @@ const Hero = () => {
 
 const Wrapper = styled.div`
   background: ${(props) => `
-  linear-gradient(125deg, ${props.theme.palette.primary.main},
-    ${props.theme.palette.secondary.main})  
+  linear-gradient(125deg, ${lighten(props.theme.palette.primary.main, 0.2)},
+    ${lighten(props.theme.palette.secondary.main, 0.4)})  
   `};
+  position: relative;
+  z-index: 100;
+
+  box-shadow: ${(props) => props.theme.shadows[18]};
 
   width: 100%;
   height: clamp(25rem, 25rem + 3vh + 4vw, 40rem);
-  border-bottom-left-radius: 0%;
-  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 35%;
+  ${(props) => props.theme.breakpoints.down('sm')} {
+    border-bottom-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+  }
 `;
 
 const Navbar = styled.div`

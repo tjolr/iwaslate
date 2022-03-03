@@ -11,6 +11,8 @@ export interface Profile {
   id: string;
   username: string;
   ppu: number;
+  reward: string;
+  rewardInfo: string;
 }
 
 export interface LatecomingProfile extends Profile {
