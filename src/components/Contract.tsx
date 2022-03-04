@@ -65,7 +65,7 @@ const Blob = styled.div`
   border-radius: 66% 34% 43% 57% / 68% 28% 72% 32%;
   background: ${(props) => `
         linear-gradient(275deg, 
-            ${alpha(props.theme.palette.secondary.main, 0.12)},
+        ${alpha(props.theme.palette.secondary.main, 0.12)},
         ${alpha(props.theme.palette.primary.main, 0.12)} 120%
         )`};
 
