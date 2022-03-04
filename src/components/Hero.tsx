@@ -31,11 +31,14 @@ const Wrapper = styled.div`
 
   width: 100%;
   height: clamp(25rem, 25rem + 4.5vh + 5vw, 43rem);
-  border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 35%;
+
+  border-radius: 49% 51% 62% 38% / 71% 64% 36% 29%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   ${(props) => props.theme.breakpoints.down('sm')} {
-    border-bottom-right-radius: 10%;
-    border-bottom-left-radius: 10%;
+    border-radius: 49% 51% 56% 44% / 91% 93% 7% 9%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 `;
 
