@@ -40,8 +40,8 @@ const Blob = styled.div`
   border-radius: 58% 42% 33% 67% / 67% 67% 33% 33%;
   background: ${(props) => `
         linear-gradient(275deg, 
-            ${alpha(props.theme.palette.secondary.main, 0.26)},
-        ${alpha(props.theme.palette.primary.main, 0.2)} 120%
+            ${alpha(props.theme.palette.secondary.main, 0.12)},
+        ${alpha(props.theme.palette.primary.main, 0.1)} 120%
         )`};
 
   position: absolute;

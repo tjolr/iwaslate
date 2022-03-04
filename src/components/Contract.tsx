@@ -56,26 +56,31 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2rem;
-
   width: 100%;
-
   position: relative;
+  overflow: hidden;
 `;
 
 const Blob = styled.div`
   border-radius: 66% 34% 43% 57% / 68% 28% 72% 32%;
   background: ${(props) => `
         linear-gradient(275deg, 
-            ${alpha(props.theme.palette.secondary.main, 0.32)},
-        ${alpha(props.theme.palette.primary.main, 0.26)} 120%
+            ${alpha(props.theme.palette.secondary.main, 0.12)},
+        ${alpha(props.theme.palette.primary.main, 0.12)} 120%
         )`};
 
   position: absolute;
-  left: 30rem;
+  left: 35%;
   top: 22rem;
   bottom: -7rem;
   right: -5rem;
   z-index: 0;
+
+  ${(props) => props.theme.breakpoints.down('sm')} {
+    left: 25%;
+    right: -15rem;
+    bottom: -20rem;
+  }
 `;
 
 export default Contract;
