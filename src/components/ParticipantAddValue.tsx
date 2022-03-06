@@ -8,6 +8,8 @@ import { useSnackbar } from 'notistack';
 import { useSetRecoilState } from 'recoil';
 import { latecomingsState } from '../store/state';
 import { Latecoming } from '../supabase/supabase.models';
+import { calculateLatecomingPenalty } from '../services/latecoming.service';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
   profileId: string;
@@ -16,7 +18,7 @@ interface Props {
 const ParticipantAddValue = ({ profileId }: Props) => {
   const [minutes, setMinutes] = useState<number>(0);
   const setLatecomings = useSetRecoilState(latecomingsState);
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const incrementMinutes = () => setMinutes((minutes) => minutes + 1);
   const decrementMinutes = () =>
@@ -25,11 +27,18 @@ const ParticipantAddValue = ({ profileId }: Props) => {
   const handleSave = async () => {
     if (minutes === 0) return;
 
+    const penalty = calculateLatecomingPenalty(minutes);
+
     try {
-      const created_at = await addNewLatecoming(profileId, minutes);
+      const created_at = await addNewLatecoming(
+        profileId,
+        minutes,
+        penalty.penaltyNOK
+      );
 
       const newLatecoming: Latecoming = {
         minutes: minutes,
+        nok: penalty.penaltyNOK,
         created_at: created_at ? new Date(created_at) : new Date(),
       };
 
@@ -38,7 +47,29 @@ const ParticipantAddValue = ({ profileId }: Props) => {
         [profileId]: [...latecomings[profileId], newLatecoming],
       }));
 
-      enqueueSnackbar('Oppdatering var vellykket', { variant: 'success' });
+      let feedbackText = `${penalty.penaltyNOK},- straff ved ${minutes} minutt${
+        minutes > 1 ? 'er' : ''
+      } for sent.`;
+      if (penalty.luckyDiscount < 0) {
+        feedbackText += `${Math.abs(penalty.luckyDiscount)},- rabatt 🎉`;
+      } else if (penalty.luckyDiscount > 0) {
+        feedbackText += `${penalty.luckyDiscount},- tillegg 😭`;
+      }
+
+      enqueueSnackbar(feedbackText, {
+        variant: 'success',
+        autoHideDuration: 10000,
+        action: (key) => (
+          <IconButton
+            style={{ color: 'white' }}
+            onClick={() => {
+              closeSnackbar(key);
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ),
+      });
       setMinutes(0);
     } catch (e) {
       enqueueSnackbar('Det skjedde en feil', { variant: 'error' });

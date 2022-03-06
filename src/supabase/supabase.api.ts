@@ -24,7 +24,7 @@ export const getAllLatecomingsForUser = async (
 ): Promise<Latecoming[]> => {
   const { data, error } = await supabase
     .from('latecomings')
-    .select('minutes, created_at')
+    .select('minutes, created_at, nok')
     .eq('guilty', uuid);
 
   if (error || !data) throw error;
@@ -34,13 +34,14 @@ export const getAllLatecomingsForUser = async (
 
 export const addNewLatecoming = async (
   uuid: string,
-  minutes: number
+  minutes: number,
+  penaltyNOK: number
 ): Promise<string | undefined> => {
   if (minutes <= 0) return;
 
   const { data, error } = await supabase
     .from('latecomings')
-    .insert([{ guilty: uuid, minutes: minutes }]);
+    .insert([{ guilty: uuid, minutes: minutes, nok: penaltyNOK }]);
 
   if (error || !data) throw error;
 

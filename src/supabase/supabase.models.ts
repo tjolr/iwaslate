@@ -1,6 +1,7 @@
 export interface Latecoming {
   created_at: Date;
   minutes: number;
+  nok: number;
 }
 
 export interface Latecomings {
@@ -17,5 +18,6 @@ export interface Profile {
 
 export interface LatecomingProfile extends Profile {
   totalMinutes: number;
-  earnedPpu?: number;
+  earnedNOK?: number;
+  penaltyNOK?: number;
 }
