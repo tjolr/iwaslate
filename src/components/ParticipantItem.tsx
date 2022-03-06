@@ -6,7 +6,7 @@ import ParticipantAddValue from './ParticipantAddValue';
 const ParticipantItem = ({
   username,
   ppu,
-  earnedPpu,
+  earnedNOK,
   totalMinutes,
   id,
 }: LatecomingProfile) => {
@@ -15,7 +15,7 @@ const ParticipantItem = ({
   return (
     <Wrapper>
       <Typography variant={isMobile ? 'h3' : 'h1'} sx={{ mb: 3 }}>
-        {earnedPpu} <span style={{ fontSize: '35%' }}>/ {ppu} NOK</span>
+        {earnedNOK} <span style={{ fontSize: '35%' }}>/ {ppu} NOK</span>
       </Typography>
       <Typography variant="h5" sx={{ my: 1 }}>
         {username}

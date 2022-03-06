@@ -19,8 +19,6 @@ import {
 } from '../store/state';
 
 const ParticipantOverview = () => {
-  const PENALTY = 10;
-
   const { enqueueSnackbar } = useSnackbar();
 
   const [profiles, setProfiles] = useRecoilState(profilesState);
@@ -64,14 +62,21 @@ const ParticipantOverview = () => {
 
     // First calculate how many minutes late each person has been
     profiles.forEach((profile) => {
-      const totalLateMinutes = latecomings[profile.id].reduce(
-        (total, latecoming) => total + latecoming.minutes,
-        0
+      const totalMinutesPenalty = latecomings[profile.id].reduce(
+        (acc, latecoming) => ({
+          minutes: acc.minutes + latecoming.minutes,
+          penaltyNOK: acc.penaltyNOK + latecoming.nok,
+        }),
+        {
+          minutes: 0,
+          penaltyNOK: 0,
+        }
       );
 
       const latecomingProfile: LatecomingProfile = {
         ...profile,
-        totalMinutes: totalLateMinutes,
+        totalMinutes: totalMinutesPenalty.minutes,
+        penaltyNOK: totalMinutesPenalty.penaltyNOK,
       };
 
       newLatecomingProfiles.push(latecomingProfile);
@@ -87,13 +92,13 @@ const ParticipantOverview = () => {
             // multiply total minutes late with penalty, and divide with
             // the amount of other profiles in the same group
             // (currently doesn't do the dividing part)
-            earnings += otherLatecomingProfile.totalMinutes * PENALTY;
+            earnings += otherLatecomingProfile.penaltyNOK ?? 0;
           }
         });
 
         const updatedLatecomingProfile: LatecomingProfile = {
           ...latecomingProfile,
-          earnedPpu: earnings,
+          earnedNOK: earnings,
         };
 
         return updatedLatecomingProfile;
