@@ -1,17 +1,30 @@
-import { IconButton, lighten } from '@mui/material';
+import { Avatar, IconButton, lighten } from '@mui/material';
 import styled from 'styled-components';
 import Title from './Title';
-import MenuIcon from '@mui/icons-material/Menu';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import ParticipantOverview from './ParticipantOverview';
+import { signInWithGithub, signOut } from '../supabase/supabase.auth';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../store/state';
 
 const Hero = () => {
+  const user = useRecoilValue(userState);
+
   return (
     <Wrapper>
       <Navbar>
         <Title />
-        <IconButton>
-          <MenuIcon style={{ color: 'white' }} />
-        </IconButton>
+        <AvatarIconWrapper>
+          {user ? (
+            <IconButton onClick={signOut}>
+              <Avatar alt="User avatar" src={user.user_metadata.avatar_url} />
+            </IconButton>
+          ) : (
+            <IconButton onClick={signInWithGithub}>
+              <GitHubIcon style={{ color: 'white' }} />
+            </IconButton>
+          )}
+        </AvatarIconWrapper>
       </Navbar>
 
       <ParticipantOverview />
@@ -47,7 +60,15 @@ const Navbar = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 1rem;
+  margin-left: 1rem;
   padding: 0.5rem;
+`;
+
+const AvatarIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
 `;
 export default Hero;

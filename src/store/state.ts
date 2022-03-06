@@ -1,3 +1,4 @@
+import { User } from '@supabase/supabase-js';
 import { atom } from 'recoil';
 import {
   LatecomingProfile,
@@ -18,4 +19,9 @@ export const latecomingsState = atom<Latecomings>({
 export const latecomingProfilesState = atom<LatecomingProfile[]>({
   key: 'latecomingProfilesState',
   default: [],
+});
+
+export const userState = atom<User | null>({
+  key: 'userState',
+  default: null,
 });
