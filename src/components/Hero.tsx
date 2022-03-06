@@ -60,7 +60,7 @@ const Navbar = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   padding: 0.5rem;
 `;
 
