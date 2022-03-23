@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   box-shadow: ${(props) => props.theme.shadows[18]};
 
   width: 100%;
-  height: clamp(25rem, 25rem + 4.5vh + 5vw, 43rem);
+  height: clamp(35rem, 35rem + 5vh + 6vw, 58rem);
 
   border-radius: 49% 51% 62% 38% / 71% 64% 36% 29%;
   border-top-left-radius: 0;
