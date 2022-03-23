@@ -72,7 +72,9 @@ const ParticipantAddValue = ({ profileId }: Props) => {
       });
       setMinutes(0);
     } catch (e) {
-      enqueueSnackbar('Det skjedde en feil', { variant: 'error' });
+      enqueueSnackbar('Godt forsøk 😂 Nysgerrigheten ble for stor?', {
+        variant: 'error',
+      });
     }
   };
 
