@@ -1,4 +1,4 @@
-import { Button, IconButton, Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import styled from 'styled-components';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -10,6 +10,7 @@ import { latecomingsState } from '../store/state';
 import { Latecoming } from '../supabase/supabase.models';
 import { calculateLatecomingPenalty } from '../services/latecoming.service';
 import CloseIcon from '@mui/icons-material/Close';
+import { StyledButton } from './StyledButton';
 
 interface Props {
   profileId: string;
@@ -120,17 +121,6 @@ const IncDecAmount = styled.div`
 const StyledIconButton = styled(IconButton)`
   color: #53aa7a;
   margin: 0 1rem;
-`;
-
-const StyledButton = styled(Button)`
-  width: 80%;
-  border-radius: 10px;
-  background: #53aa7a;
-  color: white;
-
-  :hover {
-    background: #5dc08a;
-  }
 `;
 
 export default ParticipantAddValue;

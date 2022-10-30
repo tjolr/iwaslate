@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { profilesState } from '../store/state';
 import { Profile } from '../supabase/supabase.models';
+import { ExtractMoney } from './ExtractMoney';
 import RewardItem from './RewardItem';
 
 const RewardSection = () => {
@@ -14,11 +15,21 @@ const RewardSection = () => {
         Hva skal pengene brukes på?
       </Typography>
 
-      <RewardItemWrapper>
+      <RewardItemsWrapper>
         {profiles.map((profile: Profile) => (
           <RewardItem key={profile.id} {...profile} />
         ))}
-      </RewardItemWrapper>
+      </RewardItemsWrapper>
+      <ExtractionsWrapper>
+        {profiles.map((profile, i) => (
+          <ExtractMoney
+            key={profile.id}
+            {...profile}
+            // Extraction for Anders needs to add a latecoming using Tjøls ID
+            id={profiles[Math.abs(i - 1)].id}
+          />
+        ))}
+      </ExtractionsWrapper>
 
       <Blob></Blob>
     </Wrapper>
@@ -65,7 +76,7 @@ const Blob = styled.div`
   }
 `;
 
-const RewardItemWrapper = styled.div`
+const RewardItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -92,6 +103,15 @@ const RewardItemWrapper = styled.div`
         ${lighten(props.theme.palette.primary.main, 0.35)},
         ${lighten(props.theme.palette.secondary.main, 0.26)} 170%)`};
   }
+`;
+
+const ExtractionsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 10;
+  width: 100%;
 `;
 
 export default RewardSection;
