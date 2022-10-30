@@ -47,3 +47,16 @@ export const addNewLatecoming = async (
 
   if (data?.length > 0) return [...data][0]['created_at'];
 };
+
+export const extractMoney = async (
+  uuid: string,
+  extractionAmount: number
+): Promise<string | undefined> => {
+  const { data, error } = await supabase
+    .from('latecomings')
+    .insert([{ guilty: uuid, minutes: 0, nok: -extractionAmount }]);
+
+  if (error || !data) throw error;
+
+  if (data?.length > 0) return [...data][0]['created_at'];
+};
