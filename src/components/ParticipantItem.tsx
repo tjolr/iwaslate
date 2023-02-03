@@ -96,8 +96,9 @@ const ParticipantItem = ({
 
       <Typography variant="h6" sx={{ mb: 3 }}>
         {getFullyEarnedUnits(earnedNOK ?? 0, ppu)}{' '}
-        {getFullyEarnedUnits(earnedNOK ?? 0, ppu) != 1 &&
-          StringUtils.rewardToPlural(reward)}
+        {getFullyEarnedUnits(earnedNOK ?? 0, ppu) === 1
+          ? reward
+          : StringUtils.rewardToPlural(reward)}
       </Typography>
 
       <ParticipantAddValue profileId={id} />
